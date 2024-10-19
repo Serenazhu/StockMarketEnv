@@ -137,7 +137,7 @@ class StockMarketEnv(gym.Env):
                 self.stock_data["price"] = max(100, min(300, self.stock_data["price"]))  # Ensure price stays within bounds
             
         # Check if episode is done 
-        done = self.current_balance <= 0 and self.num_shares <= 0
+        done = self.current_balance <= 0 and self.num_shares <= 0 or self.current_balance >= 2000
             
         # Get the new observation
         obs = self._get_obs()
@@ -152,7 +152,7 @@ obs = env.reset()
 done = False
 
 
-for i in range(10):
+while not done:
     # Sample a random action
     action = env.action_space.sample()
     
